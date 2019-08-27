@@ -1,0 +1,26 @@
+service: crypto-updater
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs8.10
+  memorySize: 128
+
+package:
+  exclude:
+    - '**'
+  include:
+    - update.js
+    - models/Price.js
+    - node_modules/**
+
+functions:
+  update:
+    environment:
+      mongoUser: ${file(env.json):mongoUser}
+      mongoPw: ${file(env.json):mongoPw}
+    handler: update.handler
+    events:
+    - schedule:
+        rate: cron(*/5 * * * ? *)
+        enabled: true

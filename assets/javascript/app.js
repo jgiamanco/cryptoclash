@@ -37,13 +37,13 @@ var app = {
 
     getPrices: function( ){
 
-      var queryURL = 'https://cryptoclash.herokuapp.com/api/history/'+ this.activeCurrency;
+      var queryURL = '/api/history/'+ this.activeCurrency;
 
       $.ajax({
         url: queryURL,
         method: "GET"
       }).then(function(result) {
-
+    
         app.priceHistoryModule.data = result;
         app.priceHistoryModule.renderPrices();
 
@@ -60,12 +60,13 @@ var app = {
       };
 
       for( var i = 0; i < this.data.length; i++ ){
-        let date = moment.unix(this.data[i].date); 
+        let date = moment.unix(this.data[i].date);        
         chartLine.x.unshift(date.format('HH:mm'));
         chartLine.y.unshift(this.data[i].price);
       }
 
       var data = [chartLine]
+
 
       var layout = {
         title: this.activeCurrency + " prices in the last week",
@@ -451,7 +452,7 @@ var app = {
       },
 
       dogecoin: {
-        primary: "#cb9800",
+        primary: "#e1b303",
         secondary: "#000000"
       },
       

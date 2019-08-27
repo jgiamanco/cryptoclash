@@ -6,7 +6,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 // Utils
-var priceHistory = require('./helpers/priceHistory');
+//var priceHistory = require('./helpers/priceHistory');
 
 // Models
 var Message = require('./models/Message.js');
@@ -62,7 +62,7 @@ app.get('/api/history/:currency' , function(req,res){
 		} else {
 			res.json( data );
 		}
-	} ).sort({ date : -1 }).limit(7);
+	} ).sort({ date : -1 }).limit(25);
 });
 
 
@@ -94,6 +94,3 @@ io.on('connection', function(socket){
 http.listen(process.env.PORT  || 8080, function(){
 	console.log('listening on :8080');
 });
-
-
-
