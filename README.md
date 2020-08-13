@@ -1,7 +1,4 @@
-# Project-1 UNC Code School
-
-* Project Title
-	• Crypto Clash Dashboard
+# Project-CryptoClash
 
 * Team Name & Members
 	• Tech Chumps
@@ -9,6 +6,7 @@
 		• Alex Florian-Prescott (919 257-8446)
 		• Tony Gottschalk (919 638-3658)
 		• Harris Joseph (828 620-0256)
+		• Jacob Giamanco (619 592-2261)
 
 * Project Description
 	• Real-time Polling and Chat service
@@ -32,6 +30,7 @@
 	• UI
 		• Tony
 		• Richard
+		• Jacob
 	• Backend
 		• Alex
 		• Harris
