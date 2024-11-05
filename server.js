@@ -1,5 +1,5 @@
 var express = require('express');
-var mongoose = require('mongoose');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 var app = express();
 var path = require('path')
 var http = require('http').Server(app);
@@ -13,16 +13,35 @@ var Message = require('./models/Message.js');
 var Price = require('./models/Price.js');
 
 // Database configuration with mongoose
-mongoose.connect(process.env.MONGODB_URI || "mongodb://team:test@ds117878.mlab.com:17878/heroku_hc9dctcq");
-var db = mongoose.connection;
+const uri = process.env.MONGODB_URI || `mongodb+srv://${dbUser}:${dbUserPw}@cryptoclash.huwah.mongodb.net/?retryWrites=true&w=majority&appName=cryptoClash`;
+const client = new MongoClient(uri, {
+    serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
+  });
+  async function run() {
+    try {
+      // Connect the client to the server	(optional starting in v4.7)
+      await client.connect();
+      // Send a ping to confirm a successful connection
+      await client.db("admin").command({ ping: 1 });
+      console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    } finally {
+      // Ensures that the client will close when you finish/error
+      await client.close();
+    }
+  }
+  run().catch(console.dir);
 
 // Show any mongoose errors
-db.on("error", function(error) {
+client.on("error", function(error) {
  console.log("Mongoose Error: ", error);
 });
 
 // Once logged in to the db through mongoose, log a success message
-db.once("open", function() {
+client.once("open", function() {
  console.log("Mongoose connection successful.");
 });
 
